@@ -52,10 +52,10 @@ CREATE DATABASE planificador;
     )ENGINE=InnoDB;
 
     CREATE TABLE unidades(
-        idUnidad INT PRIMARY KEY NOT NULL AUTO_INCREMENT, -- idUnidades
+        idUnidad INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         idMateria INT,
         unidad INT(2),
-        nombreUnidad VARCHAR(50),
+        nombreUnidad VARCHAR(60),
         FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
     )ENGINE=InnoDB;
 
