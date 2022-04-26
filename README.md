@@ -1,2 +1,1 @@
-# Planificador
-Desarrollo de un sistema web para la creación y control de las planificaciones docentes
+# PlanificadorDesarrollo de un sistema web para la creación y control de las planificaciones docentes## Mapa de la carpeta del proyecto[poner aquí el archivo generado para mostrar el árbol de directorios]### Base de datosMostramos las tablas utilizadas dentro de las base de datos:* roles* usuarios* grados* materias* materiasniveles* unidades* contenidos* asignaciones* planificaciones* plandetalles* recursos## Carpeta \application### views* comun* errors* inicio* perfiles* roles* profesores
