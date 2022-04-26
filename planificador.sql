@@ -18,7 +18,7 @@ CREATE DATABASE planificador;
             correo    VARCHAR(50),
             telefono  VARCHAR(9),
             usuario   VARCHAR(20),
-            clave     VARCHAR(50),
+            clave     VARCHAR(255),
             idRol     INT,
             FOREIGN KEY (idRol) REFERENCES roles(idRol)
         )
