@@ -6,7 +6,7 @@ class InicioModel extends CI_Model{
 	private $filtrado 	= ' usuarios.idRol = roles.idRol ';
 	private $preciso 	= ' AND usuarios.usuario = ';
 
-	public function ListarUsuarios($usuario){
+	public function LlamarProfesor($usuario){
 		$this->db->select($this->columnas)->from($this->tablas)->where($this->filtrado.$this->preciso.'"'.$usuario.'"');
 		return $this->db->get()->result();
 	}

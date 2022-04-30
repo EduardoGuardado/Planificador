@@ -7,15 +7,14 @@
     <div class="col-12">
             <div class="input-group-btn">
             <a href="<?php echo base_url()?>index.php/MNControlador/index" class="btn btn-dark">Regresar</a>
-            <a href="<?php echo base_url()?>index.php/UnidadesControlador/insertar/<?php echo $idAsignacion; ?>" class="btn btn-warning">Asignar Unidades</a>
+            <a href="<?php echo base_url()?>index.php/UnidadesControlador/insertar/<?php echo $idMateriaNivel; ?>" class="btn btn-warning">Asignar Unidades</a>
              </div>
     </div>
 </div>
 <br>
 <div class="row">
     <div class="col-12" id="divTabla">
-        <?php $data['idAsignacion'] = $idAsignacion; ?>
-        <?php $this->load->view('unidades/tabla_unidades',$data); ?>
+        <?php $this->load->view('unidades/tabla_unidades'); ?>
     </div>
 </div>
 

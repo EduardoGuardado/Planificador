@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class MNModel extends CI_Model{
     private $nombreTabla = "materiasniveles";
-    private $idTabla = "idAsignacion";
+    private $idTabla = "idMateriaNivel";
 
 	public function insertar($datos)
 	{
@@ -19,12 +19,6 @@ class MNModel extends CI_Model{
 		    return $this->db->error;
 	}
 
-	public function Listar(){
-		$this->db->from('materiasniveles');
-		return $this->db->query("SELECT materiasniveles.idAsignacion, materiasniveles.idMateria, materias.materia, materiasniveles.idGrado
-		FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria order by materiasniveles.idGrado");
-	}
-
 	public function Eliminar($id){
 		$this->db->delete($this->nombreTabla, array($this->idTabla => $id)); 
 	}
@@ -40,16 +34,27 @@ class MNModel extends CI_Model{
 	public function Buscar($nivel,$materia){
 		if($nivel==0){
 			if($materia==0){
-				return $this->db->query("SELECT materiasniveles.idAsignacion, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria");
+				return $this->db->query("SELECT materiasniveles.idMateriaNivel, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria");
 			}else{
-				return $this->db->query("SELECT materiasniveles.idAsignacion, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idMateria=$materia");
+				return $this->db->query("SELECT materiasniveles.idMateriaNivel, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idMateria=$materia");
 			}
 		}else{
 			if($materia==0){
-				return $this->db->query("SELECT materiasniveles.idAsignacion, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idGrado = $nivel");
+				return $this->db->query("SELECT materiasniveles.idMateriaNivel, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idGrado = $nivel");
 			}else{
-				return $this->db->query("SELECT materiasniveles.idAsignacion, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idMateria=$materia and materiasniveles.idGrado = $nivel");				
+				return $this->db->query("SELECT materiasniveles.idMateriaNivel, materias.materia, materiasniveles.idGrado FROM materiasniveles, materias WHERE materiasniveles.idMateria = materias.idMateria and materiasniveles.idMateria=$materia and materiasniveles.idGrado = $nivel");				
 			}
 		}
+	}
+
+	public function ListarUnidades($idMateriaNivel){
+		$this->db->from('unidades');
+		return $this->db->query("SELECT materiasniveles.idMateriaNivel, unidades.idUnidad, unidades.unidad, unidades.nombreUnidad
+		FROM materiasniveles, unidades 
+		WHERE materiasniveles.idMateriaNivel = unidades.idMateriaNivel and unidades.idMateriaNivel = $idMateriaNivel order by unidades.unidad");
+	}
+
+	public function Consultas($tabla,$id,$nombre){
+		return $this->db->query("SELECT $id as id, $nombre as nombre FROM $tabla");
 	}
 }

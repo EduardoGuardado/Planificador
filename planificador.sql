@@ -53,7 +53,7 @@ CREATE DATABASE planificador;
 
     CREATE TABLE unidades(
         idUnidad INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-        idMateria INT,
+        idMateriaNivel INT,
         unidad INT(2),
         nombreUnidad VARCHAR(60),
         FOREIGN KEY (idMateria) REFERENCES materias(idMateria)

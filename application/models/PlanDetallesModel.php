@@ -58,9 +58,9 @@ class PlanDetallesModel extends CI_Model{
 	}
 
 	// ACCEDER AL LISTADO DE RECURSOS PEDIDOS EN EL DETALLE DE LA PLANIFICACIÓN
-	/*public function Recursos($id){
+	public function Recursos($idPlanDetalle){
 		return $this->db->query("SELECT r.idRecurso, u.nombre, u.apellido, m.materia, uni.unidad, uni.nombreUnidad, c.correlativo, c.tema, r.recurso, r.tipo
 		FROM recursos as r, plandetalles as pd, planificaciones as p, asignaciones as a, usuarios as u, contenidos as c, unidades as uni, materias as m
-		WHERE r.idPlanDetalle = $id AND r.idPlanDetalle = pd.idPlanDetalle AND pd.idPlanificacion = p.idPlanificacion AND p.idAsignacion = a.idAsignacion AND a.idUsuario = u.idUsuario AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND uni.idMateria = m.idMateria");
-	}*/
+		WHERE r.idPlanDetalle = $idPlanDetalle AND r.idPlanDetalle = pd.idPlanDetalle AND pd.idPlanificacion = p.idPlanificacion AND p.idAsignacion = a.idAsignacion AND a.idUsuario = u.idUsuario AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND uni.idMateria = m.idMateria");
+	}
 }

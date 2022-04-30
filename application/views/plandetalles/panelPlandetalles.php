@@ -47,7 +47,7 @@
             </div>
 
             <div >
-                <a class="btn btn-info btn-icon btn-sm" href="<?php echo base_url()?>index.php/PlanDetallesControlador/recursos_asociados/<?php echo $plandetalle->idPlanDetalle;?>" data-toggle="tooltip" data-placement="top" title="Recursos">
+                <a class="btn btn-info btn-icon btn-sm" href="<?php echo base_url()?>index.php/PlanDetallesControlador/VerRecursos/<?php echo $plandetalle->idPlanDetalle;?>" data-toggle="tooltip" data-placement="top" title="Recursos">
                     <i class="material-icons">folder</i>
                 </a>
                 <a class="btn btn-warning btn-icon btn-sm" href="<?php echo base_url()?>index.php/PlanDetallesControlador/Editar/<?php echo $plandetalle->idPlanDetalle;?>/<?php echo $idPlanificacion;?>/<?php echo $idAsignacion;?>/<?php echo $anio;?>/<?php echo $materia;?>" data-toggle="tooltip" data-placement="top" title="Editar">

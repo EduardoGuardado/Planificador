@@ -6,10 +6,11 @@ class MNControlador extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->model("MNModel");
+		$this->load->library('session');
     }
 
 
-    public function index()
+    public function index($id = 0)
 	{
 		$data['ListaAsignaciones']	= $this->MNModel->Listar();
 		$data["materias"] = $this->MNModel->ConsultaCombo("materias","idMateria","materia");
@@ -74,5 +75,22 @@ class MNControlador extends CI_Controller {
 
 			$this->load->view('materianivel/tabla_mn', $data);
 		}
+	}
+
+	public function VerUnidades($idMateriaNivel){
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['user'] = $user;
+		$data['rol'] = $rol;
+
+		$data['idMateriaNivel'] = $idMateriaNivel;
+
+		$data['ListaUnidades']= $this->MNModel->ListarUnidades($idMateriaNivel);
+		$data["materias"] = $this->MNModel->Consultas("materiasniveles, materias where materiasniveles.idMateria = materias.idMateria and materiasniveles.idMateriaNivel = $idMateriaNivel",
+		"materiasniveles.idMateriaNivel","concat(materias.materia,' ', materiasniveles.idGrado,'°')");
+
+		$this->load->view('comun/header', $data);
+		$this->load->view('unidades/index', $data);
+		$this->load->view('comun/footer');
 	}
 }

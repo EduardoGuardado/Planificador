@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Usuario</th>
 			<th>Materia</th>
             <th>Grado</th>
             <th></th>
@@ -11,6 +12,7 @@
         <?php foreach($ListaAsignaciones->result() as $asignacion){?>
             <tr>
                 <td><?php echo $asignacion->idAsignacion; ?></td>
+                <td><?php echo $asignacion->nombre; ?></td>
 				<td><?php echo $asignacion->materia; ?></td>
                 <td><?php echo $asignacion->nivel."°"; ?></td>
                 <td class="text-right">

@@ -16,8 +16,6 @@ class ProfesoresControlador extends CI_Controller {
 		$data['user'] = $user;
 		$data['rol'] = $rol;
 
-		$data['ListaProfesores'] = $this->PerfilesModel->ListarProfesores();
-
 		$this->load->view('comun/header', $data);
 		$this->load->view('profesores/index', $data);
 		$this->load->view('comun/footer');
@@ -140,6 +138,20 @@ class ProfesoresControlador extends CI_Controller {
 
 		$this->load->view('comun/header', $data);
 		$this->load->view('planificaciones/index', $data);
+		$this->load->view('comun/footer');
+	}
+
+	public function VerAsignaciones($idProfesor){
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['idProfesor'] = $idProfesor;
+		$data['user'] = $user;
+		$data['rol'] = $rol;
+
+		$data['ListaAsignaciones']	= $this->ProfesoresModel->ListarAsignaciones($idProfesor);
+		
+		$this->load->view('comun/header', $data);
+		$this->load->view('asignaciones/index', $data);
 		$this->load->view('comun/footer');
 	}
 }

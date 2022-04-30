@@ -106,12 +106,18 @@ class PlanDetallesControlador extends CI_Controller {
 		}
 	}
 
-	/*public function recursos_asociados($id){
-		$data["ListaRecursos"] = $this->PlanDetallesModel->Recursos($id);
-		$data["id"] = $id;
+	public function VerRecursos($idPlanDetalle)
+	{
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['user'] = $user;
+		$data['rol'] = $rol;
 
-		$this->load->view('comun/header');
+		$data["ListaRecursos"] = $this->PlanDetallesModel->Recursos($idPlanDetalle);
+		$data["idPlanDetalle"] = $idPlanDetalle;
+
+		$this->load->view('comun/header', $data);
 		$this->load->view('recursos/index', $data);
 		$this->load->view('comun/footer');
-	}*/
+	}
 }

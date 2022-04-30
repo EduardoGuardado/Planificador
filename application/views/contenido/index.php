@@ -9,7 +9,7 @@
             <a href="<?php echo base_url()?>index.php/UnidadesControlador/index/<?php foreach($materias->result() as $res){ 
                     echo $res->id;
                     }?>" class="btn btn-dark">Regresar</a>
-            <a href="<?php echo base_url()?>index.php/ContenidosControlador/insertar/<?php echo $idDetalleUnidad; ?>" class="btn btn-warning">Asignar Temas</a>
+            <a href="<?php echo base_url()?>index.php/ContenidosControlador/insertar/<?php echo $idUnidad; ?>" class="btn btn-warning">Asignar Temas</a>
             </div>
         </div>
     </div>

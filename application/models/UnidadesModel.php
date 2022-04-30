@@ -19,18 +19,19 @@ class UnidadesModel extends CI_Model{
 		    return $this->db->error;
 	}
 
-	public function Listar($idAsignacion){
-		$this->db->from('unidades');
-		return $this->db->query("SELECT materiasniveles.idAsignacion, unidades.idDetalleUnidad, unidades.unidad, unidades.nombreUnidad
-		FROM materiasniveles, unidades WHERE materiasniveles.idAsignacion = unidades.idAsignacion and unidades.idAsignacion = $idAsignacion order by unidades.unidad");
-	}
-
 	public function Eliminar($id){
 		$this->db->delete($this->nombreTabla, array($this->idTabla => $id)); 
 	}
 
 	public function Consultar($id){
 		return $this->db->get_where($this->nombreTabla, array($this->idTabla => $id))->row();
+	}
+
+	public function ListarContenidos($idUnidad){
+		$this->db->from('contenidos');
+		return $this->db->query("SELECT unidades.idUnidad, contenidos.idContenido, contenidos.correlativo, contenidos.tema 
+		from unidades, contenidos
+		WHERE unidades.idUnidad = contenidos.idUnidad and contenidos.idUnidad = $idUnidad order by contenidos.correlativo");
 	}
 
 	public function ConsultaCombo($tabla,$id,$nombre){

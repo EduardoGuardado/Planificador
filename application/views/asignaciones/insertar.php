@@ -4,6 +4,15 @@
             <h3>Agregar Asignación</h3>
             <div id="errors" class="alert alert-danger" role="alert" style="display:none;"></div>
             <div class="form-group">
+                <label for="usuario">Nombre Profesor</label>
+                <select class="form-control" name="idUsuario" id="usuario">
+                    <option>Seleccionar Profesor</option>
+                    <?php foreach($profesores->result() as $res){ ?>
+                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
+                    <?php }?>
+                </select>
+            </div>
+			<div class="form-group">
                 <label for="materia">Materia a Asignar</label>
                 <select class="form-control" name="idMateria" id="materia">
                     <option>Seleccionar Materia</option>
@@ -15,18 +24,10 @@
 			<div class="form-group">
                 <label for="grado">Grado</label>
                 <select class="form-control" name="idGrado" id="grado">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
+                    <option>Seleccionar Grado</option>
+                    <?php foreach($grados->result() as $res){ ?>
+                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
+                    <?php }?>
                 </select>
             </div>
         </div>
@@ -50,10 +51,11 @@
                 dangerMode: true,
             }).then((result) => {
                 if (result) {
-    				var materia               = $('#materia').val();
+                    var usuario               = $('#usuario').val();
+					var materia               = $('#materia').val();
                     var grado               = $('#grado').val();
                     
-                    var data = {idMateria: materia, idGrado: grado};
+                    var data = {idUsuario: usuario, idMateria: materia, idGrado: grado};
                     console.log(data);
                     $.post('<?php echo base_url()?>index.php/AsignacionesControlador/insertar',data,function(response){
                         if(response == 'ok'){

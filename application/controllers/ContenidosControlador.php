@@ -6,16 +6,17 @@ class ContenidosControlador extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->model("ContenidosModel");
+		$this->load->library('session');
     }
 
-    public function index($idDetalleUnidad)
+    public function index($id = 0)
 	{
-		$data['ListaContenido']	= $this->ContenidosModel->Listar($idDetalleUnidad);
-		$data['idDetalleUnidad']=$idDetalleUnidad;
-		$data["materias"] = $this->ContenidosModel->ConsultaCombo("unidades, materiasniveles WHERE materiasniveles.idAsignacion = unidades.idAsignacion and unidades.idDetalleUnidad = $idDetalleUnidad",
-		"unidades.idAsignacion",
-		"concat('Unidad #',unidades.unidad,' ',unidades.nombreUnidad)");
-		$this->load->view('comun/header');
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['user'] = $user;
+		$data['rol'] = $rol;
+		
+		$this->load->view('comun/header', $data);
 		$this->load->view('contenido/index', $data);
 		$this->load->view('comun/footer');
 	}

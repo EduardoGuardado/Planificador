@@ -1,4 +1,7 @@
-<div class="row justify-content-md-center" style="padding-top: 10em;">
+<div class="row justify-content-md-center" style="padding-top: 0.2em;">
+    <div class="col-md-auto">
+    <img src="./assets/img/logoedusys.png" class="img-fluid" alt="...">
+    </div>
     <div class="col-md-auto">
         <form class="form" action="<?php echo base_url()?>index.php/InicioControlador/InicioSesion" method="post">
             <div class="row">

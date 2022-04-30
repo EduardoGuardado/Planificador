@@ -6,15 +6,17 @@ class UnidadesControlador extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->model("UnidadesModel");
+		$this->load->library('session');
     }
 
-    public function index($idAsignacion)
+    public function index($id = 0)
 	{
-		$data['ListaUnidades']= $this->UnidadesModel->Listar($idAsignacion);
-		$data['idAsignacion']= $idAsignacion;
-		$data["materias"] = $this->UnidadesModel->ConsultaCombo("materiasniveles, materias where materiasniveles.idMateria = materias.idMateria and materiasniveles.idAsignacion = $idAsignacion",
-		"materiasniveles.idAsignacion","concat(materias.materia,' ', materiasniveles.idGrado,'°')");
-		$this->load->view('comun/header');
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['user'] = $user;
+		$data['rol'] = $rol;
+
+		$this->load->view('comun/header', $data);
 		$this->load->view('unidades/index', $data);
 		$this->load->view('comun/footer');
 	}
@@ -67,5 +69,23 @@ class UnidadesControlador extends CI_Controller {
 			$data['ListaUnidades'] 	= $this->UnidadesModel->Buscar($this->input->post('nivel'),$this->input->post('materia'),$this->input->post('unidad'));
 			$this->load->view('unidades/tabla_unidades', $data);
 		}
+	}
+
+	public function VerContenidos($idUnidad){
+		$user = $this->session->userdata('usuario');
+		$rol = $this->session->userdata('rol');
+		$data['user'] = $user;
+		$data['rol'] = $rol;
+
+		$data['idUnidad'] = $idUnidad;
+
+		$data['ListaContenido']	= $this->UnidadesModel->ListarContenidos($idUnidad);
+		$data["materias"] = $this->UnidadesModel->ConsultaCombo("unidades, materiasniveles WHERE materiasniveles.idMateriaNivel = unidades.idMateriaNivel and unidades.idUnidad = $idUnidad",
+		"unidades.idMateriaNivel",
+		"concat('Unidad #',unidades.unidad,' ',unidades.nombreUnidad)");
+		
+		$this->load->view('comun/header', $data);
+		$this->load->view('contenido/index', $data);
+		$this->load->view('comun/footer');
 	}
 }

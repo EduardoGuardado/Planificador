@@ -33,6 +33,9 @@
                     <a class="btn btn-info btn-icon btn-sm" href="<?php echo base_url()?>index.php/ProfesoresControlador/VerPlanificaciones/<?php echo $profesor->idUsuario;?>" data-toggle="tooltip" data-placement="top" title="Planificaciones">
                         <i class="material-icons">list</i>
                     </a>
+                    <a class="btn btn-success btn-icon btn-sm" href="<?php echo base_url()?>index.php/ProfesoresControlador/VerAsignaciones/<?php echo $profesor->idUsuario;?>" data-toggle="tooltip" data-placement="top" title="Asignaciones">
+                        <i class="material-icons">list</i>
+                    </a>
                     <a class="btn btn-warning btn-icon btn-sm" href="<?php echo base_url()?>index.php/ProfesoresControlador/Editar/<?php echo $profesor->idUsuario; ?>" data-toggle="tooltip" data-placement="top" title="Editar">
                         <i class="material-icons">edit</i>
                     </a>

@@ -19,13 +19,6 @@ class ContenidosModel extends CI_Model{
 		    return $this->db->error;
 	}
 
-	public function Listar($idDetalleUnidad){
-		$this->db->from('contenidos');
-		return $this->db->query("SELECT unidades.idDetalleUnidad, contenidos.idContenido, contenidos.correlativo, contenidos.tema 
-		from unidades, contenidos
-		WHERE unidades.idDetalleUnidad = contenidos.idDetalleUnidad and contenidos.idDetalleUnidad = $idDetalleUnidad order by contenidos.correlativo");
-	}
-
 	public function Eliminar($id){
 		$this->db->delete($this->nombreTabla, array($this->idTabla => $id)); 
 	}
@@ -33,9 +26,4 @@ class ContenidosModel extends CI_Model{
 	public function Consultar($id){
 		return $this->db->get_where($this->nombreTabla, array($this->idTabla => $id))->row();
 	}
-
-	public function ConsultaCombo($tabla,$id,$nombre){
-		return $this->db->query("SELECT $id as id, $nombre as nombre FROM $tabla");
-	}
-
 }
