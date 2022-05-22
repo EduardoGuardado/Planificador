@@ -56,7 +56,7 @@ CREATE DATABASE planificador;
         idMateriaNivel INT,
         unidad INT(2),
         nombreUnidad VARCHAR(60),
-        FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
+        FOREIGN KEY (idMateriaNivel) REFERENCES materiasNiveles(idMateriaNivel)
     )ENGINE=InnoDB;
 
     CREATE TABLE contenidos(
