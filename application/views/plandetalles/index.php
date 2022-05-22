@@ -1,9 +1,15 @@
 <br>
+<?php
+    $director = "director";
+    $profesor = "profesor";
+    // CONVERTIMOS LA CADENA DEL ROL EN MINÚSCULAS
+    $Nrol = strtolower($rol);
+?>
 <div class="row">
     <!-- REEMPLAZAMOS LOS CARACTERES ESPECIALES QUE SE AGREGARON EN LA URl Y DE ESTA MANERA PASAR EL VAROL EXACTO-->
     <?php $Nmateria = preg_replace('/[0-9\@\.\;\" "\%]+/', ' ', $materia);?>
     <div class="col-sm-12">
-        <h3>Contenidos de la Planificación de <?php echo $Nmateria;?></h3>
+        <h3>Contenidos para <?php echo $Nmateria;?></h3>
         <br>
     </div>
     <div class="col-xs-10 col-md-8">
@@ -35,9 +41,13 @@
             </span>
         </div>
     </div>
-    <div class="col-sm-12 col-md-4 text-right">
-        <a href="<?php echo base_url()?>index.php/PlanDetallesControlador/Insertar/<?php echo $idPlanificacion;?>/<?php echo $idAsignacion;?>/<?php echo $anio;?>/<?php echo $materia;?>" class="btn btn-primary">Agregar</a>
-    </div>
+    <?php if ($Nrol == $director) {?>
+        <div></div>
+    <?php }else if($Nrol == $profesor){?>
+        <div class="col-sm-12 col-md-4 text-right">
+            <a href="<?php echo base_url()?>index.php/PlanDetallesControlador/Insertar/<?php echo $idPlanificacion;?>/<?php echo $idAsignacion;?>/<?php echo $anio;?>/<?php echo $materia;?>" class="btn btn-primary">Agregar</a>
+        </div>
+    <?php }?>
 </div>
 <br>
 <div class="row">

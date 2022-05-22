@@ -66,9 +66,9 @@ class PlanificacionesModel extends CI_Model{
 
 	// ACCEDER AL LOS DATOS PEDIDOS EN LA PLANIFICACIÓN PARA MOSTRAR SU DETALLE
 	public function Detalles($idPlanificacion, $idAsignacion, $anio){
-		$this->db->select("pd.`idPlanDetalle`, u.idUsuario, u.nombre, u.apellido, p.anio, DATE_FORMAT(pd.`desde`,'%d-%m-%Y') as desde, DATE_FORMAT(pd.`hasta`,'%d-%m-%Y') as hasta, m.idMateria, m.materia, uni.unidad, uni.nombreUnidad, c.correlativo, c.tema, DATE_FORMAT(pd.`ejecutado`,'%d-%m-%Y') as ejecutado")
-				->from("`plandetalles` as pd, `planificaciones` as p, `asignaciones` as a, `usuarios` as u, `contenidos` as c, `unidades` as uni, `materias` as m")
-				->where("pd.idPlanificacion = $idPlanificacion AND a.idAsignacion = $idAsignacion AND p.anio = $anio AND a.idUsuario = u.idUsuario AND p.idAsignacion = a.idAsignacion AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND m.idMateria = uni.idMateria");
+		$this->db->select("pd.`idPlanDetalle`, u.idUsuario, u.nombre, u.apellido, p.anio, DATE_FORMAT(pd.`desde`,'%d-%m-%Y') as desde, DATE_FORMAT(pd.`hasta`,'%d-%m-%Y') as hasta, m.idMateria, m.materia, uni.unidad, uni.nombreUnidad, c.correlativo, c.tema, DATE_FORMAT(pd.`ejecutado`,'%d-%m-%Y') as ejecutado, IF(DAY(pd.ejecutado)>0,1,0) as hecho")
+				->from("`plandetalles` as pd, `planificaciones` as p, `asignaciones` as a, `usuarios` as u, `contenidos` as c, `unidades` as uni, `materias` as m, materiasniveles as mn")
+				->where("pd.idPlanificacion = $idPlanificacion AND a.idAsignacion = $idAsignacion AND p.anio = $anio AND a.idUsuario = u.idUsuario AND p.idAsignacion = a.idAsignacion AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND uni.idMateriaNivel = mn.idMateriaNivel AND m.idMateria = mn.idMateria");
 		return $this->db->get()->result();
 	}
 }

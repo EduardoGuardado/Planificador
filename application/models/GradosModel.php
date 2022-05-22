@@ -24,16 +24,6 @@ class GradosModel extends CI_Model{
 		$this->db->delete($this->nombreTabla, array($this->idTabla => $id)); 
 	}
 
-	public function ListarMateriaNivel($idGrado, $nivel){
-		$this->db->from('materiasniveles');
-		return $this->db->query("SELECT materiasniveles.idMateriaNivel, materiasniveles.idMateria, materias.materia, materiasniveles.idGrado, grados.nivel
-		FROM materiasniveles, materias, grados WHERE materiasniveles.idMateria = materias.idMateria AND materiasniveles.idGrado = grados.idGrado AND grados.idGrado = $idGrado AND grados.nivel = $nivel order by materiasniveles.idMateria");
-	}
-
-	public function Consulta($tabla,$id,$nombre){
-		return $this->db->query("SELECT $id as id, $nombre as nombre FROM $tabla");
-	}
-
 	public function Consultar($id){
 		return $this->db->get_where($this->nombreTabla, array($this->idTabla => $id))->row();
 	}

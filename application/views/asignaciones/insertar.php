@@ -5,7 +5,7 @@
             <div id="errors" class="alert alert-danger" role="alert" style="display:none;"></div>
             <div class="form-group">
                 <label for="usuario">Nombre Profesor</label>
-                <select class="form-control" name="idUsuario" id="usuario">
+                <select class="form-control" name="idUsuario" id="idUsuario">
                     <option>Seleccionar Profesor</option>
                     <?php foreach($profesores->result() as $res){ ?>
                     <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
@@ -14,19 +14,10 @@
             </div>
 			<div class="form-group">
                 <label for="materia">Materia a Asignar</label>
-                <select class="form-control" name="idMateria" id="materia">
+                <select class="form-control" name="idMateriaNivel" id="idMateriaNivel">
                     <option>Seleccionar Materia</option>
-                    <?php foreach($materias->result() as $res){ ?>
-                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
-                    <?php }?>
-                </select>
-            </div>
-			<div class="form-group">
-                <label for="grado">Grado</label>
-                <select class="form-control" name="idGrado" id="grado">
-                    <option>Seleccionar Grado</option>
-                    <?php foreach($grados->result() as $res){ ?>
-                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
+                    <?php foreach($materias as $res){ ?>
+                    <option value="<?php echo $res->idMateriaNivel;?>"><?php echo $res->materia." - Grado: ".$res->nivel;?></option>
                     <?php }?>
                 </select>
             </div>
@@ -51,15 +42,14 @@
                 dangerMode: true,
             }).then((result) => {
                 if (result) {
-                    var usuario               = $('#usuario').val();
-					var materia               = $('#materia').val();
-                    var grado               = $('#grado').val();
+                    var idUsuario            = $('#idUsuario').val();
+					var idMateriaNivel       = $('#idMateriaNivel').val();
                     
-                    var data = {idUsuario: usuario, idMateria: materia, idGrado: grado};
+                    var data = {idUsuario: idUsuario, idMateriaNivel: idMateriaNivel};
                     console.log(data);
-                    $.post('<?php echo base_url()?>index.php/AsignacionesControlador/insertar',data,function(response){
+                    $.post('<?php echo base_url()?>index.php/AsignacionesControlador/insertar/<?php echo $idProfesor;?>',data,function(response){
                         if(response == 'ok'){
-                            window.location = '<?php echo base_url()?>index.php/AsignacionesControlador';
+                            window.location = '<?php echo base_url()?>index.php/ProfesoresControlador/VerAsignaciones/<?php echo $idProfesor;?>';
                         }else{
                             $('#errors').html(response);
                             $('#errors').show();

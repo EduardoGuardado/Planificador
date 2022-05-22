@@ -37,7 +37,7 @@
                     var data = {materia: materia};
                     $.post('<?php echo base_url()?>index.php/MateriasControlador/insertar',data,function(response){
                         if(response == 'ok'){
-                            window.location = '<?php echo base_url()?>index.php/MateriasControlador';
+                            window.location = '<?php echo base_url()?>index.php/PerfilesControlador/VerMaterias';
                         }else{
                             $('#errors').html(response);
                             $('#errors').show();

@@ -102,24 +102,124 @@
   .submenu:hover .submenu-content {
     display: block;
   }
+
+  /* ESTILOS PERSONALIZADOS */
+
+  /* TARJETAS */
+  .tarjeta-profesor{
+    background-color: #FFD6B5;
+    color: black;
+    width: 18rem;
+    margin-top: 2em;
+  }
+
+  .tarjeta-materias{
+    background-color: #B4D1FF;
+    color: black;
+    width: 18rem;
+    margin-top: 2em;
+  }
+
+  .tarjeta-grados{
+    background-color: #FFBFBF;
+    color: black;
+    width: 18rem;
+    margin-top: 2em;
+  }
+  
+  .tarjeta-materianivel{
+    background-color: #B5FFDB;
+    color: black;
+    width: 18rem;
+    margin-top: 2em;
+  }
+  
 </style>
 
 </head>
 
 <body>
 <div class="navbar navbar-expand-lg navbar-light bg-light">
-  <a href="<?php echo base_url().'index.php/InicioControlador/PerfilUsuario'; ?>" title="inicio"><i class="material-icons">book</i></a>
+
+  <a href="<?php echo base_url().'index.php/InicioControlador/PerfilUsuario'; ?>" title="inicio">
+    <i class="material-icons">book</i>
+  </a>
+
   <div class="dropdown">
       <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
         <i class="material-icons">menu</i>
       </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <p class="dropdown-item" ><?php echo $user;?></p>
-        <a class="dropdown-item" href="#">Calendario</a>
-        <a class="dropdown-item" href="#">Ajustes</a>
-        <a class="dropdown-item" href="<?php echo base_url().'index.php/InicioControlador/CerrarSesion'?>">Cerrar Sesión</a>
+      <div class="container">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 245px;">
+          <a class="dropdown-item">
+            <div class="row">
+              <div class="col">
+                <i class="material-icons">person</i>
+              </div>
+              <div class="col">
+                <p><?php echo $user;?></p>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="<?php echo base_url().'index.php/InicioControlador/PerfilUsuario'; ?>">
+            <div class="row">
+              <div class="col">
+                <i class="material-icons">home</i>
+              </div>
+              <div class="col">
+                <p>Inicio</p>
+              </div>
+            </div>
+          </a>
+          <?php if ($rol == "Profesor") { ?>
+            <a class="dropdown-item" href="#">
+              <div class="row">
+                <div class="col">
+                  <i class="material-icons">table</i>
+                </div>
+                <div class="col">
+                  <p>Calendario</p>
+                </div>
+              </div>
+            </a>
+          <?php }else if($rol == "Director"){ ?>
+          <?php } ?>
+          <a class="dropdown-item" href="#">
+            <div class="row">
+              <div class="col">
+                <i class="material-icons">settings</i>
+              </div>
+              <div class="col">
+                <p>Ajustes</p>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="#">
+            <div class="row">
+              <div class="col">
+                <i class="material-icons">help</i>
+              </div>
+              <div class="col">
+                <p>Ayuda</p>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="<?php echo base_url().'index.php/InicioControlador/CerrarSesion'?>">
+            <div class="row">
+              <div class="col">
+                <i class="material-icons">output</i>
+              </div>
+              <div class="col">
+                <p>Cerrar Sesión</p>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
   </div>
+
+  <div><?php echo $Unombre;?></div>
+
 </div>
 
   <div class="container">

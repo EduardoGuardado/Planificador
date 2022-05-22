@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h3>Asignar Unidades</h3>
-            <input type="hidden" value="<?php echo $idAsignacion ?>" id="idAsignacion" name="idAsignacion">
+            <input type="hidden" value="<?php echo $idAsignacion ?>" id="idMateriaNivel" name="idMateriaNivel">
 			<div class="form-group">
             <label for="unidad">Unidad #</label>
                 <input type="text" class="form-control" id="unidad" name="unidad" placeholder="Numero de la Unidad">
@@ -34,13 +34,13 @@
                 if (result) {
                     var unidad               = $('#unidad').val();
                     var nomUni              =$('#nomUni').val();
-                    var idAsig              =$('#idAsignacion').val();
+                    var idMateriaNivel              =$('#idMateriaNivel').val();
                     
-                    var data = {idAsignacion: idAsig, unidad: unidad, nombreUnidad:nomUni};
+                    var data = {idMateriaNivel: idMateriaNivel, unidad: unidad, nombreUnidad: nomUni};
                     console.log(data);
-                    $.post('<?php echo base_url()?>index.php/UnidadesControlador/insertar/'+idAsig,data,function(response){
+                    $.post('<?php echo base_url()?>index.php/UnidadesControlador/insertar/'+idMateriaNivel,data,function(response){
                         if(response == 'ok'){
-                            window.location = '<?php echo base_url()?>index.php/UnidadesControlador/index/'+idAsig;
+                            window.location = '<?php echo base_url()?>index.php/MNControlador/VerUnidades/'+idMateriaNivel;
                         }else{
                             $('#errors').html(response);
                             $('#errors').show();

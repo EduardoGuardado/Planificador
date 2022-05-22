@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h3>Agregar Temas a Unidad</h3>
-            <input type="hidden" value="<?php echo $idDetalleUnidad ?>" id="idDetalleUnidad" name="idDetalleUnidad">
+            <input type="hidden" value="<?php echo $idDetalleUnidad ?>" id="idUnidad" name="idUnidad">
 			<div class="form-group">
             <label for="correlativo">Correlativo</label>
                 <input type="text" class="form-control" id="correlativo" name="correlativo" placeholder="Numero del tema">
@@ -32,15 +32,15 @@
                 dangerMode: true,
             }).then((result) => {
                 if (result) {
-    				var unidad               = $('#idDetalleUnidad').val();
-                    var correlativo               = $('#correlativo').val();
-                    var tema              =$('#tema').val();
+    				var idUnidad         = $('#idUnidad').val();
+                    var correlativo      = $('#correlativo').val();
+                    var tema             =$('#tema').val();
                     
-                    var data = {idDetalleUnidad: unidad, correlativo: correlativo, tema:tema};
+                    var data = {idUnidad: idUnidad, correlativo: correlativo, tema:tema};
                     console.log(data);
-                    $.post('<?php echo base_url()?>index.php/ContenidosControlador/insertar/'+unidad,data,function(response){
+                    $.post('<?php echo base_url()?>index.php/ContenidosControlador/insertar/'+idUnidad,data,function(response){
                         if(response == 'ok'){
-                            window.location = '<?php echo base_url()?>index.php/ContenidosControlador/index/'+unidad;
+                            window.location = '<?php echo base_url()?>index.php/UnidadesControlador/VerContenidos/'+idUnidad;
                         }else{
                             $('#errors').html(response);
                             $('#errors').show();

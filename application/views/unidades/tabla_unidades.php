@@ -1,3 +1,4 @@
+<?php $mensaje = "<div class='col'><div class='alert alert-dark text-center' role='alert'><p class='display-4'>No hay elementos para mostrar</p></div></div>";?>
 <div class="row">
 <?php foreach($ListaUnidades->result() as $unidades){?>
     <div class="card text-center" style="width: 23rem; margin: 5px; background-color: #F2F2F2">
@@ -15,5 +16,6 @@
         </button>
         </div>
     </div>
-    <?php }?>
+<?php }?>
+    <p><?php if($ListaUnidades->result() == null){echo $mensaje;}?></p>
 </div>

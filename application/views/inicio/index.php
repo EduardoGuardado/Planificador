@@ -102,6 +102,10 @@
     .submenu:hover .submenu-content {
         display: block;
     }
+
+    .logo-sistema{
+        width: 30em;
+    }
 </style>
 
 </head>
@@ -114,5 +118,7 @@
             </div>
         </div>
     </div>
+    
+    <a href="<?php echo base_url()?>index.php/InicioControlador/Secreto" style="color: red;">registrar</a>
 </body>
 </html>

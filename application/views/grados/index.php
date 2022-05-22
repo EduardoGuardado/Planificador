@@ -14,6 +14,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-4 text-right">
+        <a href="<?php echo base_url()?>index.php/InicioControlador/PerfilUsuario" class="btn btn-secondary">Volver</a>
         <a href="<?php echo base_url()?>index.php/GradosControlador/insertar" class="btn btn-primary">Agregar</a>
     </div>
 </div>

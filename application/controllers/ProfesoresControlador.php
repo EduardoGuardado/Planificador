@@ -2,23 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProfesoresControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
 
 	function __construct(){
         parent::__construct();
         $this->load->model('ProfesoresModel');
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 
     public function index()
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
-
-		$this->load->view('comun/header', $data);
-		$this->load->view('profesores/index', $data);
-		$this->load->view('comun/footer');
+		/* NO USADO */
 	}
 
 	public function Insertar(){
@@ -47,10 +47,9 @@ class ProfesoresControlador extends CI_Controller {
                 echo '¡Ocurrió un error al guardar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
 			$data["verRol"] = $this->ProfesoresModel->VerRol();
 
@@ -87,10 +86,9 @@ class ProfesoresControlador extends CI_Controller {
                 echo '¡Ocurrió un error al actualizar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
             $data["profesor"] = $this->ProfesoresModel->Buscar($id);
 			$data["verRol"] = $this->ProfesoresModel->VerRol();
@@ -115,20 +113,18 @@ class ProfesoresControlador extends CI_Controller {
 		if($this->input->post()){
 			$data['ListaProfesores'] = $this->ProfesoresModel->Buscar($this->input->post('profesor'));
 
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
 			$this->load->view('profesores/profesoresListado', $data);
 		}
 	}
 
 	public function VerPlanificaciones($idProfesor){
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
+		$data['Unombre'] = $this->Unombre;
+		$data['user'] = $this->user;
+		$data['rol'] = $this->rol;
 
 		$data['ListaPlanificaciones'] = $this->ProfesoresModel->ListarPlanificaciones($idProfesor);
 		$data['NombreProfesor'] = $this->ProfesoresModel->NombreProfesor($idProfesor);
@@ -142,11 +138,11 @@ class ProfesoresControlador extends CI_Controller {
 	}
 
 	public function VerAsignaciones($idProfesor){
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
+		$data['Unombre'] = $this->Unombre;
+		$data['user'] = $this->user;
+		$data['rol'] = $this->rol;
+		
 		$data['idProfesor'] = $idProfesor;
-		$data['user'] = $user;
-		$data['rol'] = $rol;
 
 		$data['ListaAsignaciones']	= $this->ProfesoresModel->ListarAsignaciones($idProfesor);
 		

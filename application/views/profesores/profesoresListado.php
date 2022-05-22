@@ -1,3 +1,6 @@
+<?php
+    $mensaje = "<div class='col'><div class='alert alert-dark text-center' role='alert'><p class='display-4'>No hay elementos para mostrar</p></div></div>";
+?>
 <div class="row">
 <?php foreach($ListaProfesores as $profesor){?>
     <?php if ($profesor->rol != $rol) {?>
@@ -47,4 +50,5 @@
         </div>
     <?php }?>
 <?php }?>
+<p><?php if($profesor->rol == "Director"){echo $mensaje;}?></p>
 </div>

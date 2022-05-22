@@ -1,7 +1,7 @@
 <br>
 <div class="row">
     <div class="col-sm-12">
-        <h3>Lista de Asignaciones</h3>
+        <h3>Lista de Materias asignadas a grados</h3>
     </div>
     <div class="col-xs-10 col-md-8">
         <div class="input-group">
@@ -27,8 +27,8 @@
             <div class="form-group">
                 <select class="form-control" name="idMateria" id="materia">
                     <option value="0">Seleccionar Materia</option>
-                    <?php foreach($materias->result() as $res){ ?>
-                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
+                    <?php foreach($materias as $res){ ?>
+                    <option value="<?php echo $res->idMateria;?>"><?php echo $res->materia;?></option>
                     <?php }?>
                 </select>
             </div>
@@ -36,9 +36,12 @@
             <button id="btn_busqueda" class="btn btn-default btn-fill" type="button" >
                 buscar
             </button>
-            <a href="<?php echo base_url()?>index.php/MNControlador/insertar" class="btn btn-warning 41">Asignar Materias</a>
             </span>
         </div>
+    </div>
+    <div class="col-sm-12 col-md-4 text-right">
+        <a href="<?php echo base_url()?>index.php/InicioControlador/PerfilUsuario" class="btn btn-secondary">Volver</a>
+        <a href="<?php echo base_url()?>index.php/MNControlador/insertar" class="btn btn-warning 41">Asignar Materias</a>
     </div>
 </div>
 <br>

@@ -2,40 +2,38 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PlanDetallesControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
 
 	function __construct(){
         parent::__construct();
         $this->load->model('PlanDetallesModel');
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 
     public function index($idPlanificacion = 0)
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
-
-		$data["ListaPlanDetalles"] = $this->PlanificacionesModel->Detalles($idPlanificacion);
-		$data["idPlanificacion"] = $idPlanificacion;
-
-		$this->load->view('comun/header', $data);
-		$this->load->view('plandetalles/index', $data);
-		$this->load->view('comun/footer');
+		/** NO SE UTILIZA */
 	}
 
-	public function Insertar($idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = ""){
-		if($this->input->post()){
+	public function Insertar($idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = "")
+	{
+		if($this->input->post())
+		{
             if($this->PlanDetallesModel->Insertar($this->input->post())){
                 echo 'ok';
             }else{
                 echo '¡Ocurrió un error al guardar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
 			$data["contenido"] = $this->PlanDetallesModel->Contenidos();
 			$data["idPlanificacion"] = $idPlanificacion;
@@ -50,18 +48,19 @@ class PlanDetallesControlador extends CI_Controller {
 		}
 	}
 
-	public function Editar($idPlanDetalle = 0, $idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = ""){
-		if($this->input->post()){
+	public function Editar($idPlanDetalle = 0, $idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = "")
+	{
+		if($this->input->post())
+		{
             if($this->PlanDetallesModel->actualizar($this->input->post(), $idPlanDetalle)){
                 echo 'ok';
             }else{
                 echo '¡Ocurrió un error al actualizar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
             $data["plandetalles"] = $this->PlanDetallesModel->Consultar($idPlanDetalle);
 			$data["contenido"] = $this->PlanDetallesModel->Contenidos();
@@ -78,8 +77,10 @@ class PlanDetallesControlador extends CI_Controller {
 		}
 	}
 
-	public function Eliminar(){
-		if($this->input->post()){
+	public function Eliminar()
+	{
+		if($this->input->post())
+		{
 			$this->PlanDetallesModel->Eliminar($this->input->post('id'));
 			echo 'ok';
 		}else{
@@ -87,14 +88,15 @@ class PlanDetallesControlador extends CI_Controller {
 		}
 	}
 
-	public function Buscar($idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = ""){
-		if($this->input->post()){
+	public function Buscar($idPlanificacion = 0, $idAsignacion = 0, $anio = 0, $materia = "")
+	{
+		if($this->input->post())
+		{
 			$data['ListaPlanDetalles'] 	= $this->PlanDetallesModel->Buscar($this->input->post('idPlanificacion'), $this->input->post('idAsignacion'), $this->input->post('anio'), $this->input->post('tema'), $this->input->post('fecha'));
 
-			$user = $this->session->userdata('usuario');
-			$rol = $this->session->userdata('rol');
-			$data['user'] = $user;
-			$data['rol'] = $rol;
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
 
 			$data["idPlanificacion"] = $idPlanificacion;
 			$data["idAsignacion"] = $idAsignacion;
@@ -108,10 +110,9 @@ class PlanDetallesControlador extends CI_Controller {
 
 	public function VerRecursos($idPlanDetalle)
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
+		$data['Unombre'] = $this->Unombre;
+		$data['user'] = $this->user;
+		$data['rol'] = $this->rol;
 
 		$data["ListaRecursos"] = $this->PlanDetallesModel->Recursos($idPlanDetalle);
 		$data["idPlanDetalle"] = $idPlanDetalle;

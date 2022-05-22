@@ -10,4 +10,9 @@ class InicioModel extends CI_Model{
 		$this->db->select($this->columnas)->from($this->tablas)->where($this->filtrado.$this->preciso.'"'.$usuario.'"');
 		return $this->db->get()->result();
 	}
+
+	public function BuscaUsuario($usuario){
+		$this->db->select('usuario')->from('usuarios')->where('usuario = '.'"'.$usuario.'"');
+		return $this->db->get()->result();
+	}
 }

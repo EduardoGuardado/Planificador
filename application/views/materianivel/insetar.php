@@ -8,26 +8,26 @@
                 <select class="form-control" name="idMateria" id="materia">
                     <option>Seleccionar Materia</option>
                     <?php foreach($materias->result() as $res){ ?>
-                    <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
+                        <option value="<?php echo $res->id;?>"><?php echo $res->nombre;?></option>
                     <?php }?>
                 </select>
             </div>
 			<div class="form-group">
                 <label for="grado">Grado</label>
                 <select class="form-control" name="idGrado" id="grado">
-                <option>Seleccionar Nivel</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
+                    <option>Seleccionar Nivel</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
                 </select>
             </div>
         </div>

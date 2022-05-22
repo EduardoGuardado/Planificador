@@ -36,6 +36,11 @@ class AsignacionesModel extends CI_Model{
 		return $this->db->query("SELECT $id as id, $nombre as nombre FROM $tabla");
 	}
 
+	public function MateriaAsignada(){
+		$this->db->select('materiasniveles.idMateriaNivel, materias.materia, grados.nivel')->from('materiasniveles, materias, grados')->where('materiasniveles.idMateria = materias.idMateria AND materiasniveles.idGrado = grados.idGrado');
+		return $this->db->get()->result();
+	}
+
 	public function Buscar($criterio){
 		$this->db->from($this->nombreTabla);
         $this->db->like("idAsignacion", $criterio);

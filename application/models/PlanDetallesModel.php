@@ -48,8 +48,8 @@ class PlanDetallesModel extends CI_Model{
 	
 	public function Contenidos(){
 		$this->db->select("contenidos.idContenido, materias.materia, unidades.unidad, unidades.nombreUnidad, contenidos.correlativo, contenidos.tema")
-				->from("contenidos, unidades, materias")
-				->where("contenidos.idUnidad = unidades.idUnidad AND unidades.idMateria = materias.idMateria");
+				->from("contenidos, unidades, materias, materiasniveles")
+				->where("contenidos.idUnidad = unidades.idUnidad AND materiasniveles.idMateria = materias.idMateria AND unidades.idMateriaNivel = materiasniveles.idMateriaNivel");
 		return $this->db->get()->result();
 	}
 
@@ -60,7 +60,7 @@ class PlanDetallesModel extends CI_Model{
 	// ACCEDER AL LISTADO DE RECURSOS PEDIDOS EN EL DETALLE DE LA PLANIFICACIÓN
 	public function Recursos($idPlanDetalle){
 		return $this->db->query("SELECT r.idRecurso, u.nombre, u.apellido, m.materia, uni.unidad, uni.nombreUnidad, c.correlativo, c.tema, r.recurso, r.tipo
-		FROM recursos as r, plandetalles as pd, planificaciones as p, asignaciones as a, usuarios as u, contenidos as c, unidades as uni, materias as m
-		WHERE r.idPlanDetalle = $idPlanDetalle AND r.idPlanDetalle = pd.idPlanDetalle AND pd.idPlanificacion = p.idPlanificacion AND p.idAsignacion = a.idAsignacion AND a.idUsuario = u.idUsuario AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND uni.idMateria = m.idMateria");
+		FROM recursos as r, plandetalles as pd, planificaciones as p, asignaciones as a, usuarios as u, contenidos as c, unidades as uni, materias as m, materiasniveles as mn
+		WHERE r.idPlanDetalle = $idPlanDetalle AND r.idPlanDetalle = pd.idPlanDetalle AND pd.idPlanificacion = p.idPlanificacion AND p.idAsignacion = a.idAsignacion AND a.idUsuario = u.idUsuario AND pd.idContenido = c.idContenido AND c.idUnidad = uni.idUnidad AND uni.idMateriaNivel = mn.idMateriaNivel AND m.idMateria = mn.idMateria");
 	}
 }

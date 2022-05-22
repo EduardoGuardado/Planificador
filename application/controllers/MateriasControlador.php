@@ -2,24 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MateriasControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
 
 	function __construct(){
         parent::__construct();
         $this->load->model("MateriasModel");
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 
     public function index()
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['ListaMaterias'] = $this->PerfilesModel->ConsultarMaterias();
-		$data['user'] = $user;
-		$data['rol'] = $rol;
-		
-		$this->load->view('comun/header');
-		$this->load->view('materias/index', $data);
-		$this->load->view('comun/footer');
+		/** NO SE UTILIZA */
 	}
 
 	public function insertar(){
@@ -30,7 +29,11 @@ class MateriasControlador extends CI_Controller {
                 echo '¡Ocurrió un error al guardar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$this->load->view('comun/header');
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+
+			$this->load->view('comun/header', $data);
 			$this->load->view('materias/insertar');
 			$this->load->view('comun/footer');
 		}
@@ -44,12 +47,16 @@ class MateriasControlador extends CI_Controller {
                 echo '¡Ocurrió un error al actualizar sus datos, por favor intente de nuevo!';
             }
 		}else{
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+			
             $data["materia"] = $this->MateriasModel->Consultar($id);
             $data["id"] = $id;
 
 			$data["elegir"] = $this->MateriasModel->ConsultaCombo();
 
-			$this->load->view('comun/header');
+			$this->load->view('comun/header', $data);
 			$this->load->view('materias/editar', $data);
 			$this->load->view('comun/footer');
 		}

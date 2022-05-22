@@ -49,7 +49,7 @@
 					var anio               = $('#anio').val();
                     
                     var data = {idAsignacion: asignacion, anio: anio};
-                    console.log(data);
+                    
                     $.post('<?php echo base_url()?>index.php/PlanificacionesControlador/Insertar',data,function(response){
                         if(response == 'ok'){
                             window.location = '<?php echo base_url()?>index.php/ProfesoresControlador/VerPlanificaciones/<?php echo $idProfesor;?>';

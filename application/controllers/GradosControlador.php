@@ -2,23 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class GradosControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
+
 
 	function __construct(){
         parent::__construct();
         $this->load->model("GradosModel");
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 
     public function index()
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
-
-		$this->load->view('comun/header', $data);
-		$this->load->view('grados/index', $data);
-		$this->load->view('comun/footer');
+		/** NO SE UTILIZA */
 	}
 
 	public function insertar(){
@@ -29,7 +30,11 @@ class GradosControlador extends CI_Controller {
                 echo '¡Ocurrió un error al guardar sus datos, por favor intente de nuevo!';
             }
 		}else{
-			$this->load->view('comun/header');
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+
+			$this->load->view('comun/header', $data);
 			$this->load->view('grados/insertar');
 			$this->load->view('comun/footer');
 		}
@@ -43,10 +48,14 @@ class GradosControlador extends CI_Controller {
                 echo '¡Ocurrió un error al actualizar sus datos, por favor intente de nuevo!';
             }
 		}else{
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+
             $data["grados"] = $this->GradosModel->Consultar($id);
             $data["id"] = $id;
 
-			$this->load->view('comun/header');
+			$this->load->view('comun/header', $data);
 			$this->load->view('grados/editar', $data);
 			$this->load->view('comun/footer');
 		}
@@ -70,20 +79,5 @@ class GradosControlador extends CI_Controller {
 
 			$this->load->view('grados/tabla_grados', $data);
 		}
-	}
-
-	public function VerMateriasAsignadas($idGrado, $nivel){
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['idGrado'] = $idGrado;
-		$data['nivel'] = $nivel;
-		$data['user'] = $user;
-		$data['rol'] = $rol;
-
-		$data['ListaAsignaciones']	= $this->GradosModel->ListarMateriaNivel($idGrado, $nivel);
-		$data["materias"] = $this->GradosModel->Consulta("materias","idMateria","materia");
-		$this->load->view('comun/header');
-		$this->load->view('materianivel/index', $data);
-		$this->load->view('comun/footer');
 	}
 }

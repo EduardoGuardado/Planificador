@@ -69,9 +69,10 @@ class ProfesoresModel extends CI_Model{
 	}
 
 	public function ListarAsignaciones($idProfesor){
-		$this->db->from('asignaciones');
-		return $this->db->query("SELECT asignaciones.idAsignacion, usuarios.nombre, materias.materia, grados.nivel 
-		FROM asignaciones, usuarios, materiasniveles, materias, grados 
-		WHERE asignaciones.idUsuario = usuarios.idUsuario AND asignaciones.idMateriaNivel = materiasniveles.idMateriaNivel AND materiasniveles.idMateria = materias.idMateria AND materiasniveles.idGrado = grados.idGrado AND usuarios.idUsuario = $idProfesor");
+		$this->db->select('asignaciones.idAsignacion, usuarios.nombre, materias.materia, grados.nivel')
+				->from('asignaciones, usuarios, materiasniveles, materias, grados')
+				->where('asignaciones.idUsuario = usuarios.idUsuario AND asignaciones.idMateriaNivel = materiasniveles.idMateriaNivel AND materiasniveles.idMateria = materias.idMateria AND materiasniveles.idGrado = grados.idGrado AND usuarios.idUsuario = '.$idProfesor);
+
+		return $this->db->get()->result();
 	}
 }

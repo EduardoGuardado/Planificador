@@ -1,4 +1,10 @@
 <br>
+<?php
+    $director = "director";
+    $profesor = "profesor";
+    // CONVERTIMOS LA CADENA DEL ROL EN MINÚSCULAS
+    $Nrol = strtolower($rol);
+?>
 <div class="row">
     <div class="col-sm-12">
         <h3>Planificaciones del Profesor <?php echo $NombreProfesor[0]->nombre." ".$NombreProfesor[0]->apellido;?></h3>
@@ -34,9 +40,15 @@
             </span>
         </div>
     </div>
-    <div class="col-sm-12 col-md-4 text-right">
-        <a href="<?php echo base_url()?>index.php/PlanificacionesControlador/Insertar/<?php echo $idProfesor;?>" class="btn btn-primary">Agregar</a>
-    </div>
+    <?php if ($Nrol == $director) {?>
+        <a href="<?php echo base_url()?>index.php/PerfilesControlador/VerProfesores" class="btn btn-secondary">Volver</a>
+        <div></div>
+    <?php }else if($Nrol == $profesor){?>
+        <div class="col-sm-12 col-md-4 text-right">
+            <a href="<?php echo base_url()?>index.php/InicioControlador/PerfilUsuario" class="btn btn-secondary">Volver</a>
+            <a href="<?php echo base_url()?>index.php/PlanificacionesControlador/Insertar/<?php echo $idProfesor;?>" class="btn btn-primary">Agregar</a>
+        </div>
+    <?php }?>
 </div>
 <br>
 <div class="row">

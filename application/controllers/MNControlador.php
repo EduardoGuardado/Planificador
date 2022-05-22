@@ -2,21 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MNControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
 
 	function __construct(){
         parent::__construct();
         $this->load->model("MNModel");
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 
 
-    public function index($id = 0)
+    public function index()
 	{
-		$data['ListaAsignaciones']	= $this->MNModel->Listar();
-		$data["materias"] = $this->MNModel->ConsultaCombo("materias","idMateria","materia");
-		$this->load->view('comun/header');
-		$this->load->view('materianivel/index', $data);
-		$this->load->view('comun/footer');
+		/** NO SE UTILIZA */
 	}
 
 	public function insertar(){
@@ -27,9 +30,13 @@ class MNControlador extends CI_Controller {
                 echo '¡Ocurrió un error al guardar sus datos, por favor intente de nuevo!';
             }
 		}else{
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+
 			$data["materias"] = $this->MNModel->ConsultaCombo("materias","idMateria","materia");
-			$data["grados"] = $this->MNModel->ConsultaCombo("materiasniveles","idAsignacion","idGrado");
-			$this->load->view('comun/header');
+			$data["grados"] = $this->MNModel->ConsultaCombo("materiasniveles","idMateriaNivel","idGrado");
+			$this->load->view('comun/header', $data);
 			$this->load->view('materianivel/insetar', $data);
 			$this->load->view('comun/footer');
 		}
@@ -44,13 +51,17 @@ class MNControlador extends CI_Controller {
                 echo '¡Ocurrió un error al actualizar sus datos, por favor intente de nuevo!';
             }
 		}else{
+			$data['Unombre'] = $this->Unombre;
+			$data['user'] = $this->user;
+			$data['rol'] = $this->rol;
+
             $data["asignaciones"] = $this->MNModel->Consultar($id);
             $data["id"] = $id;
 			
 			$data["materias"] = $this->MNModel->ConsultaCombo("materias","idMateria","materia");
 			$data["grados"] = $this->input->post();
 
-			$this->load->view('comun/header');
+			$this->load->view('comun/header', $data);
 			$this->load->view('materianivel/editar', $data);
 			$this->load->view('comun/footer');
 		}
@@ -77,11 +88,11 @@ class MNControlador extends CI_Controller {
 		}
 	}
 
-	public function VerUnidades($idMateriaNivel){
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['user'] = $user;
-		$data['rol'] = $rol;
+	public function VerUnidades($idMateriaNivel)
+	{
+		$data['Unombre'] = $this->Unombre;
+		$data['user'] = $this->user;
+		$data['rol'] = $this->rol;
 
 		$data['idMateriaNivel'] = $idMateriaNivel;
 

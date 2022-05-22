@@ -63,7 +63,7 @@
                     var data = {nivel: nivel, tipo: tipo, seccion: seccion};
                     $.post('<?php echo base_url()?>index.php/GradosControlador/insertar',data,function(response){
                         if(response == 'ok'){
-                            window.location = '<?php echo base_url()?>index.php/GradosControlador';
+                            window.location = '<?php echo base_url()?>index.php/PerfilesControlador/VerGrados';
                         }else{
                             $('#errors').html(response);
                             $('#errors').show();

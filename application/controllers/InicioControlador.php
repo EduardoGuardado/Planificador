@@ -2,17 +2,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class InicioControlador extends CI_Controller {
+	private $Unombre;
+	private $user;
+	private $rol;
 
 	function __construct()
 	{
         parent::__construct();
         $this->load->model('InicioModel');
 		$this->load->library('session');
+		
+		$this->Unombre = $this->session->userdata('nombre');
+		$this->user = $this->session->userdata('usuario');
+		$this->rol = $this->session->userdata('rol');
     }
 	
 	public function index()
 	{
-		$this->load->view('inicio/index');
+		$data['usuario'] = "";
+		$this->load->view('inicio/index',$data);
 	}
 
 	public function InicioSesion()
@@ -27,7 +35,7 @@ class InicioControlador extends CI_Controller {
 			$prUsuario	= $p->usuario;
 			$prRol		= $p->rol;
 		}
-
+		
 		if (count($datosProfesor) > 0 && password_verify($clave, $datosProfesor[0]->clave)) {
 			$datos = [
 				"nombre" 		=> $prNombre,
@@ -41,17 +49,16 @@ class InicioControlador extends CI_Controller {
 
 			return redirect(base_url()."index.php/InicioControlador/PerfilUsuario",'location',302);
 		}else{
-			return redirect(base_url(),'location',302);
+			return 	redirect(base_url(),'location',302);
 		}
 	}
 
 	public function PerfilUsuario()
 	{
-		$user = $this->session->userdata('usuario');
-		$rol = $this->session->userdata('rol');
-		$data['profesor'] = $this->InicioModel->LlamarProfesor($user);
-		$data['user'] = $user;
-		$data['rol'] = $rol;
+		$data['profesor'] = $this->InicioModel->LlamarProfesor($this->user);
+		$data['Unombre'] = $this->Unombre;
+		$data['user'] = $this->user;
+		$data['rol'] = $this->rol;
 		
 		$this->load->view('comun/header', $data);
 		$this->load->view('perfiles/index', $data);
@@ -62,5 +69,20 @@ class InicioControlador extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 		return redirect(base_url(),'location',302);
+	}
+
+	public function Secreto(){
+		$this->load->view('registro');
+	}
+
+	public function BuscaUsuario(){
+		if ($this->input->post('usuario')) {
+			$us = $this->input->post('usuario');
+			$data = $this->InicioModel->BuscaUsuario($us);
+			$nombre = $data[0]->usuario;
+			if ($nombre == $us) {
+				echo 'ok';
+			}
+		}
 	}
 }
